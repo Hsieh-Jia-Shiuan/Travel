@@ -8,8 +8,8 @@
     <string name="current_airport">高雄國際機場</string>
     <string name="tab_international">國際線</string>
     <string name="tab_domestic">國內線</string>
-    <string name="tab_departure">班機起飛</string>
-    <string name="tab_arrival">班機抵達</string>
+    <string name="tab_departure">起飛班機</string>
+    <string name="tab_arrival">抵達班機</string>
     <string name="flight_data_loading">等待加載航班資料…</string>
     <string name="flight_data_not_found">沒有找到航班資料</string>
     <string name="flight_data_estimated_time">預計時間</string>
