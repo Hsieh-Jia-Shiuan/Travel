@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -16,6 +18,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // --- Start of the section to read from local.properties ---
+        val properties = Properties()
+        val localPropertiesFile = project.rootProject.file("local.properties")
+
+        if (localPropertiesFile.exists()) {
+            properties.load(localPropertiesFile.inputStream())
+        }
+
+        val freeCurrencyApiKey = properties.getProperty("FREE_CURRENCY_API_KEY", "")
+
+        // Add the API key to BuildConfig
+        buildConfigField("String", "FREE_CURRENCY_API_KEY", "\"$freeCurrencyApiKey\"")
+        // --- End of the section to read from local.properties ---
     }
 
     buildTypes {
@@ -36,6 +52,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
