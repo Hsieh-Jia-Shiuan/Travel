@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.travel.model.entities.InstantScheduleResponse
+import com.example.travel.model.entities.flight.InstantScheduleResponse
 import com.example.travel.model.repositories.FlightRepository
 import com.example.travel.util.NetworkResult
 import kotlinx.coroutines.launch
@@ -19,7 +19,9 @@ enum class AirFlyIO(val value: Int) {
     Arrival(2), // 抵達
 }
 
-class FlightViewModel(private val repository: FlightRepository) : ViewModel() {
+class FlightViewModel(
+    private val repository: FlightRepository
+) : ViewModel() {
     private val _flightSchedules = MutableLiveData<NetworkResult<InstantScheduleResponse>>()
     val flightSchedules: LiveData<NetworkResult<InstantScheduleResponse>> = _flightSchedules
 

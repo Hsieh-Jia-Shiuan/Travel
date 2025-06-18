@@ -24,7 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.travel.model.entities.FlightSchedule
+import com.example.travel.model.entities.flight.FlightSchedule
 import com.example.travel.util.NetworkResult
 import com.example.travel.viewModel.AirFlyIO
 import com.example.travel.viewModel.AirFlyLine

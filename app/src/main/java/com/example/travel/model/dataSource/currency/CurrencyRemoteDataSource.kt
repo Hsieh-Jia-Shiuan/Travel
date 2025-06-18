@@ -1,20 +1,26 @@
-package com.example.travel.model.dataSource
+package com.example.travel.model.dataSource.currency
 
-import com.example.travel.model.entities.InstantScheduleResponse
+import com.example.travel.model.entities.currency.CurrencyResponse
 import com.example.travel.util.NetworkResult
 import retrofit2.HttpException
 import java.io.IOException
 
-class RemoteDataSource(private val apiService: ApiService) {
+/**
+ * 處理貨幣相關的遠程數據源操作
+ */
+class CurrencyRemoteDataSource(
+    private val apiKey: String,
+    private val currencyApiService: CurrencyApiService
+) {
     /**
-     * 獲取即時航班資訊
+     * 獲取貨幣匯率
      */
-    suspend fun getInstantSchedule(
-        airFlyLine: Int,
-        airFlyIO: Int
-    ): NetworkResult<InstantScheduleResponse> {
+    suspend fun getLatestCurrencies(
+        baseCurrency: String?,
+        currencies: String?
+    ): NetworkResult<CurrencyResponse> {
         return try {
-            val response = apiService.getInstantSchedule(airFlyLine, airFlyIO)
+            val response = currencyApiService.getLatestCurrencies(apiKey, baseCurrency, currencies)
             if (response.isSuccessful) {
                 response.body()?.let {
                     NetworkResult.Success(it)
