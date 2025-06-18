@@ -18,9 +18,13 @@ data class FlightSchedule(
     @SerializedName("airLineNum")
     val airLineNum: String,
     @SerializedName("upAirportCode")
-    val upAirportCode: String,
+    val upAirportCode: String?,
     @SerializedName("upAirportName")
-    val upAirportName: String,
+    val upAirportName: String?,
+    @SerializedName("goalAirportCode")
+    val goalAirportCode: String?,
+    @SerializedName("goalAirportName")
+    val goalAirportName: String?,
     @SerializedName("airPlaneType")
     val airPlaneType: String,
     @SerializedName("airBoardingGate")

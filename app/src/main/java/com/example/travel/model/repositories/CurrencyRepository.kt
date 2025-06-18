@@ -11,6 +11,6 @@ class CurrencyRepository(
         baseCurrency: String? = null,
         currencies: String? = null,
     ): NetworkResult<CurrencyResponse> {
-        return remoteDataSource.getLatestCurrencies(currencies, baseCurrency)
+        return remoteDataSource.getLatestCurrencies(baseCurrency, currencies)
     }
 }

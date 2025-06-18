@@ -6,6 +6,7 @@ import com.example.travel.model.dataSource.flight.FlightApiService
 import com.example.travel.model.dataSource.flight.FlightRemoteDataSource
 import com.example.travel.model.repositories.CurrencyRepository
 import com.example.travel.model.repositories.FlightRepository
+import com.example.travel.viewModel.CurrencyViewModel
 import com.example.travel.viewModel.FlightViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,6 +23,7 @@ private val FREE_CURRENCY_API_KEY = BuildConfig.FREE_CURRENCY_API_KEY
 
 val viewModelModules = module {
     viewModel { FlightViewModel(get()) }
+    viewModel { CurrencyViewModel(get()) }
 }
 
 val repositoryModules = module {
