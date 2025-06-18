@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Travel</string>
+    <string name="loading">加載中…</string>
+    <string name="reload">重新載入</string>
+    <string name="nav_flight">航班</string>
+    <string name="nav_currency">匯率</string>
+    <string name="current_airport_code">TPE</string>
+    <string name="current_airport">台北桃園國際機場</string>
+    <string name="tab_international">國際線</string>
+    <string name="tab_domestic">國內線</string>
+    <string name="tab_departure">班機起飛</string>
+    <string name="tab_arrival">班機抵達</string>
+    <string name="flight_data_loading">等待加載航班資料…</string>
+    <string name="flight_data_not_found">沒有找到航班資料</string>
+    <string name="flight_data_estimated_time">預計時間</string>
+    <string name="flight_data_actual_time">實際時間</string>
+    <string name="flight_data_flight_number">航機班號: %s</string>
+    <string name="flight_data_terminal_gate">航廈/登機門: %s</string>
+    <string name="flight_data_delay_reason">延誤原因: %s</string>
+    <string name="currency_data_loading">等待加載貨幣資料…</string>
+    <string name="currency_data_not_found">沒有找到貨幣資料</string>
 </resources>
