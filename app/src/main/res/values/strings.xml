@@ -4,8 +4,8 @@
     <string name="reload">重新載入</string>
     <string name="nav_flight">航班</string>
     <string name="nav_currency">匯率</string>
-    <string name="current_airport_code">TPE</string>
-    <string name="current_airport">台北桃園國際機場</string>
+    <string name="current_airport_code">KHH</string>
+    <string name="current_airport">高雄國際機場</string>
     <string name="tab_international">國際線</string>
     <string name="tab_domestic">國內線</string>
     <string name="tab_departure">班機起飛</string>
