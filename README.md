@@ -54,7 +54,7 @@
 
 ## 📷 畫面展示
 
-[damo.mp4](damo/damo.mp4)
+[demo.mp4](demo/demo.mp4)
 
 ---
 
