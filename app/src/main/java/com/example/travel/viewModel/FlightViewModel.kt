@@ -30,11 +30,32 @@ class FlightViewModel(
      *
      * @param airFlyLine 航班線路代碼
      * @param airFlyIO 航班進出代碼
+     * @param showLoadingIndicator 是否顯示載入指示器
      */
-    fun fetchFlightSchedules(airFlyLine: AirFlyLine, airFlyIO: AirFlyIO) {
+    fun fetchFlightSchedules(
+        airFlyLine: AirFlyLine,
+        airFlyIO: AirFlyIO,
+        showLoadingIndicator: Boolean = true
+    ) {
         viewModelScope.launch {
-            _flightSchedules.value = NetworkResult.Loading()
-            _flightSchedules.value = repository.getFlightSchedules(airFlyLine.value, airFlyIO.value)
+            if (showLoadingIndicator || _flightSchedules.value == null || _flightSchedules.value !is NetworkResult.Success) {
+                _flightSchedules.value = NetworkResult.Loading()
+            }
+
+            val newResult = repository.getFlightSchedules(airFlyLine.value, airFlyIO.value)
+
+            // 避免在資料內容不變時觸發不必要的 LiveData 更新
+            if (newResult is NetworkResult.Success && _flightSchedules.value is NetworkResult.Success) {
+                val currentData = (_flightSchedules.value as NetworkResult.Success).data?.instantSchedule
+                val newData = newResult.data?.instantSchedule
+
+                // 比較新舊列表內容是否相同
+                if (currentData == newData) {
+                    return@launch
+                }
+            }
+
+            _flightSchedules.value = newResult
         }
     }
 }

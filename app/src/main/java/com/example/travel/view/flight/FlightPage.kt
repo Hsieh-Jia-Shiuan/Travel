@@ -29,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,6 +46,7 @@ import com.example.travel.util.NetworkResult
 import com.example.travel.viewModel.AirFlyIO
 import com.example.travel.viewModel.AirFlyLine
 import com.example.travel.viewModel.FlightViewModel
+import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -74,15 +76,19 @@ fun FlightPage(
         }
     }
 
-    val reloadData: () -> Unit = {
+    val latestAirFlyIO by rememberUpdatedState(currentAirFlyIO)
+    val latestAirFlyLine by rememberUpdatedState(currentAirFlyLine)
+
+    val reloadData: (Boolean) -> Unit = { shouldShowLoading ->
         viewModel.fetchFlightSchedules(
-            airFlyLine = currentAirFlyLine,
-            airFlyIO = currentAirFlyIO
+            airFlyLine = latestAirFlyLine,
+            airFlyIO = latestAirFlyIO,
+            showLoadingIndicator = shouldShowLoading
         )
     }
 
     LaunchedEffect(currentAirFlyIO, currentAirFlyLine) {
-        reloadData()
+        reloadData(true)
     }
 
     Column(
@@ -127,6 +133,14 @@ fun FlightPage(
             )
         }
 
+        CountdownProgressBar(
+            durationMillis = 10 * 1000L,
+            onCountdownComplete = {
+                println("currentAirFlyIO: $currentAirFlyIO")
+                reloadData(false)
+            }
+        )
+
         val currentResult = flightSchedulesResult
 
         if (currentResult == null) {
@@ -169,7 +183,7 @@ fun FlightPage(
                     )
 
                     Button(
-                        onClick = reloadData,
+                        onClick = { reloadData(true) },
                         modifier = Modifier.padding(top = 16.dp)
                     ) {
                         Text(stringResource(R.string.reload))
